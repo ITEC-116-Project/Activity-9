@@ -1,0 +1,65 @@
+.register-page {
+  max-width: 400px;
+  margin: 1.5rem auto;
+  padding: 1.75rem;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.register-page h1 {
+  text-align: center;
+  font-size: 1.4rem;
+  background: var(--gradient-cards);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1.25rem;
+}
+
+.register-page form {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-page button[type="submit"] {
+  margin-top: 0.75rem;
+  padding: 0.6rem;
+  font-size: 0.9rem;
+}
+
+.register-page .login-link {
+  text-align: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--light-gray);
+  color: var(--medium-gray);
+  font-size: 0.85rem;
+}
+
+.register-page .login-link a {
+  font-weight: 600;
+  margin-left: 0.25rem;
+}
+
+/* Password hints */
+.password-hints {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.35rem;
+}
+
+.password-hints span {
+  font-size: 0.65rem;
+  padding: 0.15rem 0.4rem;
+  background: var(--light-gray);
+  color: var(--medium-gray);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.password-hints span.met {
+  background: var(--success-light);
+  color: var(--success);
+}

@@ -1,0 +1,140 @@
+.admin-layout {
+  display: flex;
+  min-height: calc(100vh - 50px);
+  margin: -1.5rem;
+}
+
+.admin-sidebar {
+  width: 180px;
+  background: var(--white);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 50px;
+  height: calc(100vh - 50px);
+}
+
+.sidebar-header {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar-icon {
+  font-size: 1rem;
+}
+
+.sidebar-title {
+  font-weight: 700;
+  font-size: 0.85rem;
+  background: var(--gradient-cards);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: var(--radius-sm);
+  color: var(--medium-gray);
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.nav-item:hover {
+  background: var(--lighter-gray);
+  color: var(--dark-text);
+}
+
+.nav-item.active {
+  background: var(--gradient-buttons);
+  color: var(--white);
+}
+
+.nav-icon {
+  font-size: 0.85rem;
+}
+
+.sidebar-footer {
+  padding: 0.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.admin-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem;
+  background: var(--lighter-gray);
+  border-radius: var(--radius-sm);
+}
+
+.admin-avatar {
+  font-size: 1.1rem;
+}
+
+.admin-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-name {
+  font-weight: 600;
+  font-size: 0.7rem;
+  color: var(--dark-text);
+}
+
+.admin-role {
+  font-size: 0.6rem;
+  color: var(--medium-gray);
+}
+
+.admin-main {
+  flex: 1;
+  padding: 1rem;
+  background: var(--lighter-gray);
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+  
+  .admin-sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    top: 0;
+  }
+  
+  .sidebar-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 0.35rem;
+  }
+  
+  .nav-item {
+    white-space: nowrap;
+  }
+  
+  .sidebar-footer {
+    display: none;
+  }
+}

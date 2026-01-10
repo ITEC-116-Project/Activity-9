@@ -9,14 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
+exports.User = exports.UserRole = void 0;
 const typeorm_1 = require("typeorm");
+var UserRole;
+(function (UserRole) {
+    UserRole["ADMIN"] = "admin";
+    UserRole["CUSTOMER"] = "customer";
+})(UserRole || (exports.UserRole = UserRole = {}));
 let User = class User {
     id;
-    user_id;
     name;
     email;
     password;
+    role;
+    phone;
+    address;
+    created_at;
 };
 exports.User = User;
 __decorate([
@@ -25,21 +33,33 @@ __decorate([
 ], User.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
-], User.prototype, "user_id", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], User.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ unique: true }),
     __metadata("design:type", String)
 ], User.prototype, "email", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'enum', enum: UserRole, default: UserRole.CUSTOMER }),
+    __metadata("design:type", String)
+], User.prototype, "role", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], User.prototype, "phone", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'text', nullable: true }),
+    __metadata("design:type", String)
+], User.prototype, "address", void 0);
+__decorate([
+    (0, typeorm_1.CreateDateColumn)(),
+    __metadata("design:type", Date)
+], User.prototype, "created_at", void 0);
 exports.User = User = __decorate([
-    (0, typeorm_1.Entity)({ name: 'users' })
+    (0, typeorm_1.Entity)({ name: 'e_users' })
 ], User);
 //# sourceMappingURL=users.js.map

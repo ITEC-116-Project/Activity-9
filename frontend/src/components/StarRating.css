@@ -1,0 +1,69 @@
+.star-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.star-rating .stars {
+  display: flex;
+  gap: 0.1rem;
+}
+
+.star-rating .star {
+  color: #ddd;
+  transition: color 0.15s, transform 0.15s;
+}
+
+.star-rating .star.filled {
+  color: #fbbf24;
+}
+
+.star-rating .star.half {
+  color: #fbbf24;
+  position: relative;
+}
+
+.star-rating .star.editable {
+  cursor: pointer;
+}
+
+.star-rating .star.editable:hover {
+  transform: scale(1.2);
+}
+
+.star-rating .rating-text {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.star-rating .rating-text.no-ratings {
+  color: #999;
+  font-style: italic;
+}
+
+.star-rating .rating-text.selected {
+  color: #667eea;
+  font-weight: 500;
+}
+
+/* Sizes */
+.star-rating.small .star {
+  font-size: 0.9rem;
+}
+
+.star-rating.small .rating-text {
+  font-size: 0.7rem;
+}
+
+.star-rating.medium .star {
+  font-size: 1.1rem;
+}
+
+.star-rating.large .star {
+  font-size: 1.5rem;
+}
+
+.star-rating.large .rating-text {
+  font-size: 0.9rem;
+}

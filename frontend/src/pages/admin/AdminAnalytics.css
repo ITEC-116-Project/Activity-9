@@ -1,0 +1,286 @@
+.admin-analytics {
+  max-width: 100%;
+}
+
+.admin-analytics .page-header {
+  margin-bottom: 1.25rem;
+  text-align: left;
+}
+
+.admin-analytics .page-header h1 {
+  font-size: 1.4rem;
+  margin-bottom: 0.25rem;
+}
+
+.admin-analytics .page-header p {
+  font-size: 0.85rem;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.stat-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+}
+
+.stat-icon {
+  font-size: 1.75rem;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: var(--lighter-gray);
+}
+
+.stat-card.revenue .stat-icon { background: #D1FAE5; }
+.stat-card.orders .stat-icon { background: #DBEAFE; }
+.stat-card.pending .stat-icon { background: #FEF3C7; }
+.stat-card.products .stat-icon { background: #EDE9FE; }
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--dark-text);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--medium-gray);
+}
+
+/* Alert Card */
+.alert-card {
+  background: var(--warning-light);
+  border: 1px solid var(--warning);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  color: #92400E;
+}
+
+/* Analytics Grid */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.analytics-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+}
+
+.analytics-card.wide {
+  grid-column: span 2;
+}
+
+.analytics-card h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--dark-text);
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Status List */
+.status-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0;
+}
+
+.status-count {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--dark-text);
+}
+
+/* Top Products */
+.top-products-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.top-product-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--lighter-gray);
+}
+
+.top-product-row:last-child {
+  border-bottom: none;
+}
+
+.rank {
+  font-weight: 700;
+  color: var(--primary-blue);
+  font-size: 0.85rem;
+  width: 25px;
+}
+
+.product-name {
+  flex: 1;
+  font-size: 0.85rem;
+  color: var(--dark-text);
+}
+
+.sold-count {
+  font-size: 0.75rem;
+  color: var(--medium-gray);
+  background: var(--lighter-gray);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+}
+
+/* Recent Orders */
+.recent-orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.recent-order-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 100px 100px;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--lighter-gray);
+  font-size: 0.85rem;
+}
+
+.recent-order-row:last-child {
+  border-bottom: none;
+}
+
+.order-number {
+  font-weight: 600;
+  color: var(--primary-blue);
+}
+
+.customer-name {
+  color: var(--dark-text);
+}
+
+.order-amount {
+  font-weight: 600;
+  color: var(--dark-text);
+}
+
+/* Monthly Revenue */
+.monthly-revenue {
+  height: 180px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.revenue-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
+  gap: 0.5rem;
+}
+
+.revenue-bar-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.revenue-bar {
+  width: 100%;
+  max-width: 60px;
+  background: var(--gradient-buttons);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 0.3rem;
+  min-height: 30px;
+}
+
+.bar-value {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: white;
+}
+
+.bar-label {
+  font-size: 0.7rem;
+  color: var(--medium-gray);
+  margin-top: 0.4rem;
+}
+
+.no-data {
+  color: var(--medium-gray);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .analytics-card.wide {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .recent-order-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+}

@@ -1,0 +1,144 @@
+.product-form-page {
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+.product-form-page .page-header {
+  margin-bottom: 1rem;
+}
+
+.product-form-page .page-header h1 {
+  font-size: 1.25rem;
+  background: var(--gradient-cards);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.product-form {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+}
+
+.product-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Image Upload Styles */
+.image-upload-container {
+  margin-top: 0.4rem;
+}
+
+.upload-placeholder {
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  text-align: center;
+  background: var(--background);
+  transition: all 0.3s ease;
+}
+
+.upload-placeholder:hover {
+  border-color: var(--primary-color);
+  background: rgba(108, 99, 255, 0.05);
+}
+
+.file-input {
+  display: none;
+}
+
+.upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+.upload-icon {
+  font-size: 1.75rem;
+  margin-bottom: 0.3rem;
+}
+
+.upload-label span:nth-child(2) {
+  color: var(--primary-color);
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.upload-hint {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.image-preview {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 180px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  object-fit: contain;
+  background: var(--background);
+}
+
+.btn-remove-image {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  background: var(--error-color);
+  color: white;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-remove-image:hover {
+  background: #c0392b;
+  transform: scale(1.05);
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--light-gray);
+}
+
+.form-actions .btn-secondary {
+  flex: 1;
+  padding: 0.6rem;
+}
+
+.form-actions .btn-primary {
+  flex: 1;
+  padding: 0.6rem;
+}
+
+@media (max-width: 768px) {
+  .product-form {
+    padding: 1rem;
+  }
+  
+  .product-form .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+}

@@ -1,7 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserCrudModule } from './modules/user-crud/user-crud.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { ProductsModule } from './modules/products/products.module';
+import { CartModule } from './modules/cart/cart.module';
+import { OrdersModule } from './modules/orders/orders.module';
+import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
@@ -26,7 +30,14 @@ import { UserCrudModule } from './modules/user-crud/user-crud.module';
       }),
     }),
 
-    UserCrudModule, // ✅ only your existing module
+    // ✅ Feature modules
+    AuthModule,
+    ProductsModule,
+    CartModule,
+    OrdersModule,
+
+    // ✅ Seed module (creates default admin)
+    SeedModule,
   ],
 })
 export class AppModule {}

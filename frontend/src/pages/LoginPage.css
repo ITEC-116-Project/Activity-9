@@ -1,0 +1,43 @@
+.login-page {
+  max-width: 360px;
+  margin: 1.5rem auto;
+  padding: 1.75rem;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.login-page h1 {
+  text-align: center;
+  font-size: 1.4rem;
+  background: var(--gradient-cards);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1.25rem;
+}
+
+.login-page form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-page button[type="submit"] {
+  margin-top: 0.75rem;
+  padding: 0.6rem;
+  font-size: 0.9rem;
+}
+
+.login-page .register-link {
+  text-align: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--light-gray);
+  color: var(--medium-gray);
+  font-size: 0.85rem;
+}
+
+.login-page .register-link a {
+  font-weight: 600;
+  margin-left: 0.25rem;
+}

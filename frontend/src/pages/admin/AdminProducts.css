@@ -1,0 +1,126 @@
+.admin-products .page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.admin-products .page-header h1 {
+  font-size: 1.25rem;
+  color: var(--dark-text);
+  margin: 0;
+}
+
+.admin-products .page-header .btn-primary {
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+}
+
+.table-container {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 0.7rem 1rem;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+.admin-table th {
+  background: var(--gradient-hero);
+  color: var(--white);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.5px;
+}
+
+.admin-table tr {
+  border-bottom: 1px solid var(--light-gray);
+  transition: background var(--transition-fast);
+}
+
+.admin-table tbody tr:hover {
+  background: rgba(79, 70, 229, 0.05);
+}
+
+.admin-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.admin-table td {
+  color: var(--dark-text);
+}
+
+.admin-table td.price {
+  font-weight: 700;
+  color: var(--success);
+}
+
+.admin-table td.in-stock {
+  font-weight: 600;
+  color: var(--success);
+}
+
+.admin-table td.out-of-stock {
+  font-weight: 600;
+  color: var(--error);
+}
+
+.admin-table td.actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.btn-edit {
+  padding: 0.35rem 0.75rem;
+  background: var(--primary-blue);
+  color: var(--white);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.btn-edit:hover {
+  background: var(--secondary-purple);
+  color: var(--white);
+}
+
+.btn-delete {
+  padding: 0.35rem 0.75rem;
+  background: transparent;
+  color: var(--error);
+  border: 1px solid var(--error);
+  font-size: 0.75rem;
+}
+
+.btn-delete:hover {
+  background: var(--error);
+  color: var(--white);
+  transform: none;
+  box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  .admin-products .page-header {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+  }
+  
+  .table-container {
+    overflow-x: auto;
+  }
+}

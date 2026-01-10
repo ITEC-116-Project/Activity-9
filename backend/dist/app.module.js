@@ -10,7 +10,11 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const typeorm_1 = require("@nestjs/typeorm");
-const user_crud_module_1 = require("./modules/user-crud/user-crud.module");
+const auth_module_1 = require("./modules/auth/auth.module");
+const products_module_1 = require("./modules/products/products.module");
+const cart_module_1 = require("./modules/cart/cart.module");
+const orders_module_1 = require("./modules/orders/orders.module");
+const seed_module_1 = require("./seed/seed.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -34,7 +38,11 @@ exports.AppModule = AppModule = __decorate([
                     synchronize: true,
                 }),
             }),
-            user_crud_module_1.UserCrudModule,
+            auth_module_1.AuthModule,
+            products_module_1.ProductsModule,
+            cart_module_1.CartModule,
+            orders_module_1.OrdersModule,
+            seed_module_1.SeedModule,
         ],
     })
 ], AppModule);
