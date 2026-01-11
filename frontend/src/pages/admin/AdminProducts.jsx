@@ -5,12 +5,40 @@ import { useToast } from '../../components/Toast';
 import { useConfirm } from '../../components/ConfirmModal';
 import '../../style/AdminProducts.css';
 
+const PRODUCT_CATEGORIES = [
+  'Laptops',
+  'Mobile Phones',
+  'Tablets',
+  'Pre-Built PCs',
+  'Custom PC Builds',
+  'Processors (CPU)',
+  'Graphics Cards (GPU)',
+  'Motherboards',
+  'RAM & Memory',
+  'Storage (SSD/HDD)',
+  'Power Supplies',
+  'PC Cases',
+  'Cooling & Fans',
+  'Monitors',
+  'Keyboards',
+  'Mouse & Mousepads',
+  'Headsets & Audio',
+  'Webcams & Microphones',
+  'Networking',
+  'Cables & Adapters',
+  'Laptop Accessories',
+  'Phone Accessories',
+  'Gaming Peripherals',
+  'Software & OS',
+];
+
 const AdminProducts = () => {
   const toast = useToast();
   const { confirm } = useConfirm();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('all');
 
   useEffect(() => {
     fetchProducts();
@@ -58,6 +86,18 @@ const AdminProducts = () => {
         <Link to="/admin/products/new" className="btn-primary">+ Add New Product</Link>
       </div>
       
+      <div className="filters-container">
+        <div className="filter-group">
+          <label>Filter by Category:</label>
+          <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)} className="filter-select">
+            <option value="all">All Categories</option>
+            {PRODUCT_CATEGORIES.map(category => (
+              <option key={category} value={category}>{category}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+      
       {error && (
         <div className="error-box">
           <span className="error-icon">⚠</span>
@@ -78,7 +118,7 @@ const AdminProducts = () => {
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
+            {products.filter(product => categoryFilter === 'all' || product.category === categoryFilter).map((product) => (
               <tr key={product.id}>
                 <td className="product-image-cell">
                   {product.image_url ? (

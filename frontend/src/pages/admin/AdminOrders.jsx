@@ -11,6 +11,7 @@ const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [statusFilter, setStatusFilter] = useState('all');
 
   useEffect(() => {
     fetchOrders();
@@ -65,6 +66,20 @@ const AdminOrders = () => {
         <h1>Manage Orders</h1>
       </div>
       
+      <div className="filters-container">
+        <div className="filter-group">
+          <label>Filter by Status:</label>
+          <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="filter-select">
+            <option value="all">All Orders</option>
+            <option value="pending">Pending</option>
+            <option value="processing">Processing</option>
+            <option value="shipped">Shipped</option>
+            <option value="delivered">Delivered</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+      </div>
+      
       {error && (
         <div className="error-box">
           <span className="error-icon">⚠</span>
@@ -86,7 +101,7 @@ const AdminOrders = () => {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => (
+            {orders.filter(order => statusFilter === 'all' || order.status === statusFilter).map((order) => (
               <tr key={order.id}>
                 <td className="order-number">{order.order_number}</td>
                 <td>{order.user?.name || 'Unknown'}</td>
