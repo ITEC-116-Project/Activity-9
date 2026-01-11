@@ -237,7 +237,7 @@ const ProductDetailPage = () => {
           {isAdmin && (
             <div className="admin-notice">
               <span className="admin-badge">👤 Admin View</span>
-              <p>Admin accounts cannot add items to cart.</p>
+              <p>Admin/Seller cannot add items to cart.</p>
             </div>
           )}
 
@@ -289,7 +289,7 @@ const ProductDetailPage = () => {
             <div className="average-rating">
               <span className="big-rating">{product.rating || 0}</span>
               <div className="rating-info">
-                <StarRating rating={product.rating || 0} size="medium" />
+                <StarRating rating={product.rating || 0} totalRatings={getTotalReviews()} size="medium" />
                 <span className="total-reviews">{getTotalReviews()} reviews</span>
               </div>
             </div>
