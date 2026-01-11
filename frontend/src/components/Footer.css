@@ -16,6 +16,15 @@
 .footer-brand h3 {
   font-size: 1.1rem;
   margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-logo {
+  height: 24px;
+  width: auto;
+  filter: brightness(0) invert(1);
 }
 
 .footer-description {

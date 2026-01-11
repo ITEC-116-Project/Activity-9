@@ -1,3 +1,4 @@
+import vmanLogo from '../assets/vman_logo.png';
 import './Footer.css';
 
 const Footer = () => {
@@ -5,10 +6,11 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-brand">
-          <h3>🛒 Mini E-Commerce</h3>
+          <h3><img src={vmanLogo} alt="FiveMan" className="footer-logo" /> FiveMan</h3>
           <p className="footer-description">
-            Your one-stop shop for quality products at affordable prices. 
-            We provide excellent customer service and fast delivery across the Philippines.
+            Your premier destination for laptops, mobile phones, pre-built PCs, 
+            and computer peripherals. Quality tech products with excellent service 
+            and fast delivery across the Philippines.
           </p>
         </div>
         
@@ -37,7 +39,7 @@ const Footer = () => {
       </div>
       
       <div className="footer-bottom">
-        <p>&copy; 2026 Mini E-Commerce. All rights reserved.</p>
+        <p>&copy; 2026 FiveMan. All rights reserved.</p>
       </div>
     </footer>
   );

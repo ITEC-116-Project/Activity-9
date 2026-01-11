@@ -1,45 +1,139 @@
 .register-page {
-  max-width: 400px;
-  margin: 1.5rem auto;
-  padding: 1.75rem;
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rem;
+  min-height: calc(100vh - 120px);
+  padding: 2rem 1.5rem;
+  margin: -1.5rem;
 }
 
-.register-page h1 {
+/* Brand Section (Left Side) */
+.register-brand {
   text-align: center;
-  font-size: 1.4rem;
-  background: var(--gradient-cards);
+}
+
+.register-logo {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+}
+
+.register-brand-name {
+  font-size: 3rem;
+  font-weight: 700;
+  background: var(--gradient-hero);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  letter-spacing: -1px;
+}
+
+.register-tagline {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--medium-gray);
+  max-width: 350px;
+}
+
+/* Form Container (Right Side) */
+.register-form-container {
+  background: var(--white);
+  padding: 2rem 1.75rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  width: 100%;
+  max-width: 420px;
+  border: 1px solid var(--border-color);
+}
+
+.register-form-container h2 {
+  font-size: 1.3rem;
+  color: var(--dark-text);
   margin-bottom: 1.25rem;
 }
 
-.register-page form {
+.register-form-container form {
   display: flex;
   flex-direction: column;
 }
 
-.register-page button[type="submit"] {
-  margin-top: 0.75rem;
-  padding: 0.6rem;
+.register-form-container .form-group {
+  margin-bottom: 0.75rem;
+}
+
+.register-form-container .form-group label {
+  display: none;
+}
+
+.register-form-container .form-group input,
+.register-form-container .form-group textarea {
+  padding: 0.75rem 1rem;
   font-size: 0.9rem;
 }
 
-.register-page .login-link {
+.register-form-container .form-group textarea {
+  min-height: 60px;
+}
+
+.register-btn {
+  margin-top: 0.5rem;
+  padding: 0.875rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.register-form-container .login-link {
   text-align: center;
-  margin-top: 1rem;
-  padding-top: 1rem;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
   border-top: 1px solid var(--light-gray);
   color: var(--medium-gray);
   font-size: 0.85rem;
 }
 
-.register-page .login-link a {
+.register-form-container .login-link a {
+  color: var(--secondary-purple);
   font-weight: 600;
   margin-left: 0.25rem;
+}
+
+.register-form-container .error-box {
+  margin-bottom: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .register-page {
+    flex-direction: column;
+    gap: 3rem;
+    padding: 2rem 1rem;
+  }
+  
+  .register-brand {
+    margin-bottom: 0;
+  }
+  
+  .register-logo {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .register-brand-name {
+    font-size: 2rem;
+  }
+  
+  .register-tagline {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .register-form-container {
+    padding: 1.5rem 1.25rem;
+  }
 }
 
 /* Password hints */

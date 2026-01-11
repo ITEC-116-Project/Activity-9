@@ -6,30 +6,46 @@ import { useToast } from '../components/Toast';
 import StarRating from '../components/StarRating';
 import './ProductsPage.css';
 
+const PRODUCT_CATEGORIES = [
+  'Laptops',
+  'Mobile Phones',
+  'Tablets',
+  'Pre-Built PCs',
+  'Custom PC Builds',
+  'Processors (CPU)',
+  'Graphics Cards (GPU)',
+  'Motherboards',
+  'RAM & Memory',
+  'Storage (SSD/HDD)',
+  'Power Supplies',
+  'PC Cases',
+  'Cooling & Fans',
+  'Monitors',
+  'Keyboards',
+  'Mouse & Mousepads',
+  'Headsets & Audio',
+  'Webcams & Microphones',
+  'Networking',
+  'Cables & Adapters',
+  'Laptop Accessories',
+  'Phone Accessories',
+  'Gaming Peripherals',
+  'Software & OS'
+];
+
 const ProductsPage = () => {
   const { user } = useAuth();
   const toast = useToast();
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    fetchCategories();
     fetchProducts();
   }, []);
-
-  const fetchCategories = async () => {
-    try {
-      const response = await productsAPI.getCategories();
-      setCategories(response.data);
-    } catch (err) {
-      console.error('Failed to load categories');
-    }
-  };
 
   const fetchProducts = async (searchTerm = '', category = '') => {
     try {
@@ -84,65 +100,59 @@ const ProductsPage = () => {
   if (loading) return <div className="loading">Loading products...</div>;
 
   return (
-    <div className="products-page with-sidebar">
-      {/* Category Sidebar */}
-      <aside className="category-sidebar">
-        <div className="sidebar-header">
-          <h3>📂 Categories</h3>
+    <div className="products-page">
+      <div className="page-header">
+        <h1>Our Products</h1>
+        <p>
+          {selectedCategory 
+            ? `Browsing: ${selectedCategory}` 
+            : 'Discover amazing products at great prices'}
+        </p>
+      </div>
+      
+      {error && (
+        <div className="error-box">
+          <span className="error-icon">⚠</span>
+          <span>{error}</span>
         </div>
-        <nav className="category-nav">
+      )}
+      
+      <form onSubmit={handleSearch} className="search-form">
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
+
+      {/* Category Pills - Horizontally Scrollable */}
+      <div className="category-pills">
+        <button 
+          className={`category-pill ${selectedCategory === '' ? 'active' : ''}`}
+          onClick={() => handleCategoryClick('')}
+        >
+          All Products
+        </button>
+        {PRODUCT_CATEGORIES.map((category) => (
           <button 
-            className={`category-item ${selectedCategory === '' ? 'active' : ''}`}
-            onClick={() => handleCategoryClick('')}
+            key={category}
+            className={`category-pill ${selectedCategory === category ? 'active' : ''}`}
+            onClick={() => handleCategoryClick(category)}
           >
-            <span className="category-icon">🏷️</span>
-            <span>All Products</span>
+            {category}
           </button>
-          {categories.map((category) => (
-            <button 
-              key={category}
-              className={`category-item ${selectedCategory === category ? 'active' : ''}`}
-              onClick={() => handleCategoryClick(category)}
-            >
-              <span className="category-icon">📁</span>
-              <span>{category}</span>
-            </button>
-          ))}
-        </nav>
-      </aside>
+        ))}
+      </div>
 
-      {/* Main Content */}
-      <div className="products-main">
-        <div className="page-header">
-          <h1>Our Products</h1>
-          <p>
-            {selectedCategory 
-              ? `Browsing: ${selectedCategory}` 
-              : 'Discover amazing products at great prices'}
-          </p>
-        </div>
-        
-        {error && (
-          <div className="error-box">
-            <span className="error-icon">⚠</span>
-            <span>{error}</span>
+      <div className="products-grid">
+        {products.length === 0 ? (
+          <div className="no-products">
+            <span className="no-products-icon">📦</span>
+            <p>No products available{selectedCategory ? ` in ${selectedCategory}` : ''}</p>
           </div>
-        )}
-        
-        <form onSubmit={handleSearch} className="search-form">
-          <input
-            type="text"
-            placeholder="Search products..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <button type="submit">Search</button>
-        </form>
-
-        <div className="products-grid">
-          {products.length === 0 ? (
-            <p className="no-products">No products found</p>
-          ) : (
+        ) : (
             products.map((product) => (
               <div 
                 key={product.id} 
@@ -186,7 +196,7 @@ const ProductsPage = () => {
           )}
         </div>
       </div>
-    </div>
+    // </div>
   );
 };
 

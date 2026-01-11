@@ -4,6 +4,7 @@ import { authAPI } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../components/Toast';
 import PasswordInput from '../components/PasswordInput';
+import vmanLogo from '../assets/vman_logo_colored.png';
 import './RegisterPage.css';
 
 const RegisterPage = () => {
@@ -101,98 +102,103 @@ const RegisterPage = () => {
 
   return (
     <div className="register-page">
-      <h1>Create Account</h1>
+      <div className="register-brand">
+        <img src={vmanLogo} alt="FiveMan" className="register-logo" />
+        <h1 className="register-brand-name">FiveMan</h1>
+        <p className="register-tagline">
+          Your premier destination for laptops, mobile phones,<br />
+          pre-built PCs, and computer peripherals in the Philippines.
+        </p>
+      </div>
       
-      {error && (
-        <div className="error-box">
-          <span className="error-icon">⚠</span>
-          <span>{error}</span>
-        </div>
-      )}
-      
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Name</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Enter your full name"
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Enter your email"
-            required
-          />
-        </div>
+      <div className="register-form-container">
+        <h2>Create Account</h2>
         
-        <div className="form-group">
-          <label>Password</label>
-          <PasswordInput
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="Create a strong password"
-            required
-          />
-          <div className="password-hints">
-            <span className={formData.password.length >= 8 ? 'met' : ''}>8+ chars</span>
-            <span className={/[A-Z]/.test(formData.password) ? 'met' : ''}>Uppercase</span>
-            <span className={/[a-z]/.test(formData.password) ? 'met' : ''}>Lowercase</span>
-            <span className={/[0-9]/.test(formData.password) ? 'met' : ''}>Number</span>
-            <span className={/[!@#$%^&*(),.?":{}|<>]/.test(formData.password) ? 'met' : ''}>Special</span>
+        {error && (
+          <div className="error-box">
+            <span className="error-icon">⚠</span>
+            <span>{error}</span>
           </div>
-        </div>
-
-        <div className="form-group">
-          <label>Confirm Password</label>
-          <PasswordInput
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            placeholder="Confirm your password"
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Phone (optional)</label>
-          <input
-            type="text"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            placeholder="+63 9XX XXX XXXX"
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Address (optional)</label>
-          <textarea
-            name="address"
-            value={formData.address}
-            onChange={handleChange}
-            placeholder="Enter your shipping address"
-          />
-        </div>
+        )}
         
-        <button type="submit" disabled={loading}>
-          {loading ? 'Creating Account...' : 'Register'}
-        </button>
-      </form>
-      
-      <p className="login-link">
-        Already have an account? <Link to="/login">Login here</Link>
-      </p>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Full Name"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Email"
+              required
+            />
+          </div>
+          
+          <div className="form-group">
+            <PasswordInput
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Password"
+              required
+            />
+            <div className="password-hints">
+              <span className={formData.password.length >= 8 ? 'met' : ''}>8+ chars</span>
+              <span className={/[A-Z]/.test(formData.password) ? 'met' : ''}>Uppercase</span>
+              <span className={/[a-z]/.test(formData.password) ? 'met' : ''}>Lowercase</span>
+              <span className={/[0-9]/.test(formData.password) ? 'met' : ''}>Number</span>
+              <span className={/[!@#$%^&*(),.?":{}|<>]/.test(formData.password) ? 'met' : ''}>Special</span>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <PasswordInput
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              placeholder="Confirm Password"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <input
+              type="text"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="Phone (optional)"
+            />
+          </div>
+
+          <div className="form-group">
+            <textarea
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              placeholder="Shipping Address (optional)"
+            />
+          </div>
+          
+          <button type="submit" className="register-btn" disabled={loading}>
+            {loading ? 'CREATING ACCOUNT...' : 'SIGN UP'}
+          </button>
+        </form>
+        
+        <p className="login-link">
+          Already have an account? <Link to="/login">Log In</Link>
+        </p>
+      </div>
     </div>
   );
 };

@@ -1,27 +1,27 @@
 :root {
   /* Primary Colors */
-  --primary-blue: #4F46E5;
-  --primary-blue-hover: #4338CA;
-  --primary-blue-light: #818CF8;
-  --secondary-purple: #7C3AED;
-  --secondary-purple-hover: #6D28D9;
-  --secondary-purple-light: #A78BFA;
-  --accent-teal: #06B6D4;
-  --accent-teal-hover: #0891B2;
+  --primary-blue: #051937;
+  --primary-blue-hover: #0a2a5e;
+  --primary-blue-light: #1e3a5f;
+  --secondary-purple: #0f766e;
+  --secondary-purple-hover: #0d9488;
+  --secondary-purple-light: #14b8a6;
+  --accent-teal: #0f766e;
+  --accent-teal-hover: #0d9488;
 
   /* Neutral Colors */
-  --dark-text: #1F2937;
-  --medium-gray: #6B7280;
-  --light-gray: #F3F4F6;
-  --lighter-gray: #F9FAFB;
+  --dark-text: #051937;
+  --medium-gray: #64748b;
+  --light-gray: #f1f5f9;
+  --lighter-gray: #f8fafc;
   --white: #FFFFFF;
-  --border-color: #E5E7EB;
+  --border-color: #e2e8f0;
 
   /* Gradients */
-  --gradient-hero: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
-  --gradient-cards: linear-gradient(to right, #4F46E5, #7C3AED);
-  --gradient-buttons: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
-  --gradient-accent: linear-gradient(135deg, #06B6D4 0%, #4F46E5 100%);
+  --gradient-hero: linear-gradient(135deg, #051937 0%, #0f766e 100%);
+  --gradient-cards: linear-gradient(to right, #0f766e, #14b8a6);
+  --gradient-buttons: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%);
+  --gradient-accent: linear-gradient(135deg, #051937 0%, #0f766e 100%);
 
   /* Status Colors */
   --success: #10B981;
@@ -30,21 +30,21 @@
   --warning-light: #FEF3C7;
   --error: #EF4444;
   --error-light: #FEE2E2;
-  --info: #3B82F6;
-  --info-light: #DBEAFE;
+  --info: #0f766e;
+  --info-light: #ccfbf1;
 
   /* Order Status Colors */
   --status-pending: #F59E0B;
-  --status-processing: #3B82F6;
-  --status-shipped: #8B5CF6;
+  --status-processing: #0f766e;
+  --status-shipped: #051937;
   --status-delivered: #10B981;
   --status-cancelled: #EF4444;
 
   /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 2px 0 rgba(5, 25, 55, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(5, 25, 55, 0.1), 0 2px 4px -1px rgba(5, 25, 55, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(5, 25, 55, 0.1), 0 4px 6px -2px rgba(5, 25, 55, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(5, 25, 55, 0.1), 0 10px 10px -5px rgba(5, 25, 55, 0.04);
 
   /* Border Radius */
   --radius-sm: 4px;

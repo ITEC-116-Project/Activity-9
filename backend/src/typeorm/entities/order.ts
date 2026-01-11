@@ -41,6 +41,18 @@ export class Order {
   @CreateDateColumn()
   created_at: Date;
 
+  @Column({ type: 'timestamp', nullable: true })
+  processed_at: Date;
+
+  @Column({ type: 'timestamp', nullable: true })
+  shipped_at: Date;
+
+  @Column({ type: 'timestamp', nullable: true })
+  delivered_at: Date;
+
+  @Column({ type: 'timestamp', nullable: true })
+  cancelled_at: Date;
+
   @ManyToOne(() => User, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })
   user: User;

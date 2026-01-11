@@ -113,6 +113,31 @@
   box-shadow: none;
 }
 
+/* Product Image in Table */
+.product-image-cell {
+  width: 60px;
+}
+
+.table-product-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+}
+
+.no-image-placeholder {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--light-gray);
+  border-radius: var(--radius-sm);
+  color: var(--medium-gray);
+  font-size: 0.6rem;
+}
+
 @media (max-width: 768px) {
   .admin-products .page-header {
     flex-direction: column;

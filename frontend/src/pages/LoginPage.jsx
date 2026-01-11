@@ -4,6 +4,7 @@ import { authAPI } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../components/Toast';
 import PasswordInput from '../components/PasswordInput';
+import vmanLogo from '../assets/vman_logo_colored.png';
 import './LoginPage.css';
 
 const LoginPage = () => {
@@ -49,49 +50,58 @@ const LoginPage = () => {
 
   return (
     <div className="login-page">
-      <h1>Login</h1>
+      <div className="login-brand">
+        <img src={vmanLogo} alt="FiveMan" className="login-logo" />
+        <h1 className="login-brand-name">FiveMan</h1>
+        <p className="login-tagline">
+          Your premier destination for laptops, mobile phones,<br />
+          pre-built PCs, and computer peripherals in the Philippines.
+        </p>
+      </div>
       
-      {error && (
-        <div className="error-box">
-          <span className="error-icon">⚠</span>
-          <span>{error}</span>
-        </div>
-      )}
-      
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Enter your email"
-            className={error ? 'input-error' : ''}
-            required
-          />
-        </div>
+      <div className="login-form-container">
+        <h2>Log In</h2>
         
-        <div className="form-group">
-          <label>Password</label>
-          <PasswordInput
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="Enter your password"
-            className={error ? 'input-error' : ''}
-            required
-          />
-        </div>
+        {error && (
+          <div className="error-box">
+            <span className="error-icon">⚠</span>
+            <span>{error}</span>
+          </div>
+        )}
         
-        <button type="submit" disabled={loading}>
-          {loading ? 'Logging in...' : 'Login'}
-        </button>
-      </form>
-      
-      <p className="register-link">
-        Don't have an account? <Link to="/register">Register here</Link>
-      </p>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Email"
+              className={error ? 'input-error' : ''}
+              required
+            />
+          </div>
+          
+          <div className="form-group">
+            <PasswordInput
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Password"
+              className={error ? 'input-error' : ''}
+              required
+            />
+          </div>
+          
+          <button type="submit" className="login-btn" disabled={loading}>
+            {loading ? 'LOGGING IN...' : 'LOG IN'}
+          </button>
+        </form>
+        
+        <p className="register-link">
+          New to FiveMan? <Link to="/register">Sign Up</Link>
+        </p>
+      </div>
     </div>
   );
 };

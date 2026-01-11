@@ -28,6 +28,12 @@
   gap: 0.4rem;
 }
 
+.brand-logo {
+  height: 28px;
+  width: auto;
+  filter: brightness(0) invert(1);
+}
+
 .header-brand a:hover {
   color: var(--white);
   opacity: 0.9;

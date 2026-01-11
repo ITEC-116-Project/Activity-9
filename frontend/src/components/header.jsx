@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import vmanLogo from '../assets/vman_logo.png';
 import './Header.css';
 
 const Header = () => {
@@ -31,7 +32,7 @@ const Header = () => {
     <header className="header">
       <div className="header-container">
         <div className="header-brand">
-          <Link to="/">🛒 Mini E-Commerce</Link>
+          <Link to="/"><img src={vmanLogo} alt="FiveMan" className="brand-logo" /> FiveMan</Link>
         </div>
 
         <nav className="header-nav">
@@ -62,15 +63,13 @@ const Header = () => {
                 
                 {showDropdown && (
                   <div className="user-dropdown">
-                    {!isAdmin() && (
-                      <Link 
-                        to="/account/settings" 
-                        className="dropdown-item"
-                        onClick={() => setShowDropdown(false)}
-                      >
-                        ⚙️ Account Settings
-                      </Link>
-                    )}
+                    <Link 
+                      to={isAdmin() ? "/admin/settings" : "/account/settings"}
+                      className="dropdown-item"
+                      onClick={() => setShowDropdown(false)}
+                    >
+                      ⚙️ Account Settings
+                    </Link>
                     <button onClick={handleLogout} className="dropdown-item logout-item">
                       🚪 Logout
                     </button>

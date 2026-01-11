@@ -21,19 +21,14 @@ const ProductDetailPage = () => {
 
   useEffect(() => {
     fetchProduct();
-    // Check if user has rated this product from localStorage
-    const ratedProducts = JSON.parse(localStorage.getItem('ratedProducts') || '{}');
-    if (ratedProducts[id]) {
-      setHasRated(true);
-    }
   }, [id]);
 
   useEffect(() => {
     // Check if user can rate this product (has delivered order)
-    if (user && !hasRated && user.role !== 'admin') {
+    if (user && user.role !== 'admin') {
       checkCanRate();
     }
-  }, [user, id, hasRated]);
+  }, [user, id]);
 
   const fetchProduct = async () => {
     try {
@@ -51,8 +46,10 @@ const ProductDetailPage = () => {
     try {
       const response = await productsAPI.canRate(id, user.id);
       setCanRate(response.data.canRate);
+      setHasRated(response.data.hasRated || false);
     } catch (err) {
       setCanRate(false);
+      setHasRated(false);
     }
   };
 
@@ -103,12 +100,7 @@ const ProductDetailPage = () => {
       const response = await productsAPI.rateProduct(id, rating, user.id);
       setProduct(response.data.product);
       setHasRated(true);
-      
-      // Save to localStorage
-      const ratedProducts = JSON.parse(localStorage.getItem('ratedProducts') || '{}');
-      ratedProducts[id] = rating;
-      localStorage.setItem('ratedProducts', JSON.stringify(ratedProducts));
-      
+      setCanRate(false);
       toast.success('Thank you for your rating!');
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to submit rating');

@@ -4,6 +4,33 @@ import { productsAPI, BASE_URL } from '../../services/api';
 import { useToast } from '../../components/Toast';
 import './ProductForm.css';
 
+const PRODUCT_CATEGORIES = [
+  'Laptops',
+  'Mobile Phones',
+  'Tablets',
+  'Pre-Built PCs',
+  'Custom PC Builds',
+  'Processors (CPU)',
+  'Graphics Cards (GPU)',
+  'Motherboards',
+  'RAM & Memory',
+  'Storage (SSD/HDD)',
+  'Power Supplies',
+  'PC Cases',
+  'Cooling & Fans',
+  'Monitors',
+  'Keyboards',
+  'Mouse & Mousepads',
+  'Headsets & Audio',
+  'Webcams & Microphones',
+  'Networking',
+  'Cables & Adapters',
+  'Laptop Accessories',
+  'Phone Accessories',
+  'Gaming Peripherals',
+  'Software & OS'
+];
+
 const ProductForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -206,13 +233,17 @@ const ProductForm = () => {
 
         <div className="form-group">
           <label>Category</label>
-          <input
-            type="text"
+          <select
             name="category"
             value={formData.category}
             onChange={handleChange}
-            placeholder="e.g., Electronics, Clothing"
-          />
+            required
+          >
+            <option value="">Select a category</option>
+            {PRODUCT_CATEGORIES.map((cat) => (
+              <option key={cat} value={cat}>{cat}</option>
+            ))}
+          </select>
         </div>
 
         <div className="form-actions">

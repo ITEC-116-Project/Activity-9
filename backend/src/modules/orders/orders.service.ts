@@ -149,8 +149,42 @@ export class OrdersService {
   // Update order status (admin only)
   async updateStatus(id: number, updateStatusDto: UpdateOrderStatusDto) {
     const order = await this.findOne(id);
-    
-    order.status = updateStatusDto.status;
+    const currentStatus = order.status;
+    const newStatus = updateStatusDto.status;
+
+    // Validate status transitions
+    const validTransitions: Record<string, string[]> = {
+      [OrderStatus.PENDING]: [OrderStatus.PROCESSING, OrderStatus.CANCELLED],
+      [OrderStatus.PROCESSING]: [OrderStatus.SHIPPED, OrderStatus.CANCELLED],
+      [OrderStatus.SHIPPED]: [OrderStatus.DELIVERED, OrderStatus.CANCELLED],
+      [OrderStatus.DELIVERED]: [],
+      [OrderStatus.CANCELLED]: [],
+    };
+
+    if (!validTransitions[currentStatus].includes(newStatus)) {
+      throw new BadRequestException(
+        `Cannot change status from ${currentStatus} to ${newStatus}`
+      );
+    }
+
+    // Set status-specific timestamps
+    const now = new Date();
+    switch (newStatus) {
+      case OrderStatus.PROCESSING:
+        order.processed_at = now;
+        break;
+      case OrderStatus.SHIPPED:
+        order.shipped_at = now;
+        break;
+      case OrderStatus.DELIVERED:
+        order.delivered_at = now;
+        break;
+      case OrderStatus.CANCELLED:
+        order.cancelled_at = now;
+        break;
+    }
+
+    order.status = newStatus;
     await this.orderRepository.save(order);
 
     return {
@@ -196,6 +230,7 @@ export class OrdersService {
 
       // Update order status
       order.status = OrderStatus.CANCELLED;
+      order.cancelled_at = new Date();
       await queryRunner.manager.save(order);
 
       await queryRunner.commitTransaction();

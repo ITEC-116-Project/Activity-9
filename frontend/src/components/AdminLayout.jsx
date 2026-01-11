@@ -7,49 +7,29 @@ const AdminLayout = ({ children }) => {
 
   return (
     <div className="admin-layout">
-      <aside className="admin-sidebar">
-        <div className="sidebar-header">
-          <span className="sidebar-icon">🛒</span>
-          <span className="sidebar-title">Admin Panel</span>
-        </div>
-        
-        <nav className="sidebar-nav">
-          <NavLink to="/admin" end className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-            <span className="nav-icon">📊</span>
+      <div className="admin-tabs-container">
+        <nav className="admin-tabs">
+          <NavLink to="/admin" end className={({ isActive }) => `admin-tab ${isActive ? 'active' : ''}`}>
+            <span className="tab-icon">📊</span>
             <span>Dashboard</span>
           </NavLink>
           
-          <NavLink to="/admin/orders" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-            <span className="nav-icon">📋</span>
-            <span>View Orders</span>
+          <NavLink to="/admin/orders" className={({ isActive }) => `admin-tab ${isActive ? 'active' : ''}`}>
+            <span className="tab-icon">📋</span>
+            <span>Orders</span>
           </NavLink>
           
-          <NavLink to="/admin/analytics" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-            <span className="nav-icon">📈</span>
+          <NavLink to="/admin/analytics" className={({ isActive }) => `admin-tab ${isActive ? 'active' : ''}`}>
+            <span className="tab-icon">📈</span>
             <span>Analytics</span>
           </NavLink>
           
-          <NavLink to="/admin/products" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-            <span className="nav-icon">📦</span>
+          <NavLink to="/admin/products" className={({ isActive }) => `admin-tab ${isActive ? 'active' : ''}`}>
+            <span className="tab-icon">📦</span>
             <span>Products</span>
           </NavLink>
-          
-          <NavLink to="/admin/settings" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-            <span className="nav-icon">⚙️</span>
-            <span>Account Settings</span>
-          </NavLink>
         </nav>
-
-        <div className="sidebar-footer">
-          <div className="admin-info">
-            <span className="admin-avatar">👤</span>
-            <div className="admin-details">
-              <span className="admin-name">{user?.name}</span>
-              <span className="admin-role">Administrator</span>
-            </div>
-          </div>
-        </div>
-      </aside>
+      </div>
 
       <div className="admin-main">
         {children}

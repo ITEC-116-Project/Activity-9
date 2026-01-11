@@ -1,43 +1,132 @@
 .login-page {
-  max-width: 360px;
-  margin: 1.5rem auto;
-  padding: 1.75rem;
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rem;
+  min-height: calc(100vh - 300px);
+  padding: 0.5rem 1.5rem;
+  margin: -1.5rem;
 }
 
-.login-page h1 {
+/* Brand Section (Left Side) */
+.login-brand {
   text-align: center;
-  font-size: 1.4rem;
-  background: var(--gradient-cards);
+}
+
+.login-logo {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+}
+
+.login-brand-name {
+  font-size: 3rem;
+  font-weight: 700;
+  background: var(--gradient-hero);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 1.25rem;
+  letter-spacing: -1px;
 }
 
-.login-page form {
+.login-tagline {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--medium-gray);
+  max-width: 350px;
+}
+
+/* Form Container (Right Side) */
+.login-form-container {
+  background: var(--white);
+  padding: 2rem 1.75rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid var(--border-color);
+}
+
+.login-form-container h2 {
+  font-size: 1.3rem;
+  color: var(--dark-text);
+  margin-bottom: 1.5rem;
+}
+
+.login-form-container form {
   display: flex;
   flex-direction: column;
 }
 
-.login-page button[type="submit"] {
-  margin-top: 0.75rem;
-  padding: 0.6rem;
+.login-form-container .form-group {
+  margin-bottom: 0.875rem;
+}
+
+.login-form-container .form-group label {
+  display: none;
+}
+
+.login-form-container .form-group input {
+  padding: 0.875rem 1rem;
   font-size: 0.9rem;
 }
 
-.login-page .register-link {
+.login-btn {
+  margin-top: 0.5rem;
+  padding: 0.875rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.login-form-container .register-link {
   text-align: center;
-  margin-top: 1rem;
-  padding-top: 1rem;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
   border-top: 1px solid var(--light-gray);
   color: var(--medium-gray);
   font-size: 0.85rem;
 }
 
-.login-page .register-link a {
+.login-form-container .register-link a {
+  color: var(--secondary-purple);
   font-weight: 600;
   margin-left: 0.25rem;
+}
+
+.login-form-container .error-box {
+  margin-bottom: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .login-page {
+    flex-direction: column;
+    gap: 3rem;
+    padding: 2rem 1rem;
+  }
+  
+  .login-brand {
+    margin-bottom: 0;
+  }
+  
+  .login-logo {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .login-brand-name {
+    font-size: 2rem;
+  }
+  
+  .login-tagline {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-form-container {
+    padding: 1.5rem 1.25rem;
+  }
 }

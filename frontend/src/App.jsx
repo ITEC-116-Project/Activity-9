@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ToastProvider } from './components/Toast';
+import { ConfirmProvider } from './components/ConfirmModal';
 import Header from './components/Header';
 import AdminLayout from './components/AdminLayout';
 import Footer from './components/Footer';
@@ -22,6 +23,7 @@ import AdminAnalytics from './pages/admin/AdminAnalytics';
 import AdminProducts from './pages/admin/AdminProducts';
 import ProductForm from './pages/admin/ProductForm';
 import AdminOrders from './pages/admin/AdminOrders';
+import AdminOrderDetail from './pages/admin/AdminOrderDetail';
 import AccountSettings from './pages/admin/AccountSettings';
 
 // Styles
@@ -79,6 +81,7 @@ function AppContent() {
           <Route path="/admin/products/new" element={<AdminRoute><ProductForm /></AdminRoute>} />
           <Route path="/admin/products/:id/edit" element={<AdminRoute><ProductForm /></AdminRoute>} />
           <Route path="/admin/orders" element={<AdminRoute><AdminOrders /></AdminRoute>} />
+          <Route path="/admin/orders/:id" element={<AdminRoute><AdminOrderDetail /></AdminRoute>} />
           <Route path="/admin/settings" element={<AdminRoute><AccountSettings /></AdminRoute>} />
 
           {/* 404 */}
@@ -95,7 +98,9 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <ToastProvider>
-          <AppContent />
+          <ConfirmProvider>
+            <AppContent />
+          </ConfirmProvider>
         </ToastProvider>
       </AuthProvider>
     </BrowserRouter>

@@ -84,8 +84,8 @@
 .buyer-settings .form-group input:focus,
 .buyer-settings .form-group textarea:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: var(--secondary-purple);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
   background: white;
 }
 
@@ -149,7 +149,7 @@
 .buyer-settings .btn-primary {
   width: 100%;
   padding: 0.85rem 1.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--gradient-buttons);
   color: white;
   border: none;
   border-radius: 8px;
@@ -160,8 +160,8 @@
 }
 
 .buyer-settings .btn-primary:hover:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .buyer-settings .btn-primary:disabled {

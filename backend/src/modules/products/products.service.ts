@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Like } from 'typeorm';
 import { Product } from '../../typeorm/entities/product';
 import { Order, OrderItem, OrderStatus } from '../../typeorm/entities/order';
+import { ProductRating } from '../../typeorm/entities/product-rating';
 import { CreateProductDto, UpdateProductDto } from './dto/product.dto';
 
 @Injectable()
@@ -14,6 +15,8 @@ export class ProductsService {
     private orderRepository: Repository<Order>,
     @InjectRepository(OrderItem)
     private orderItemRepository: Repository<OrderItem>,
+    @InjectRepository(ProductRating)
+    private productRatingRepository: Repository<ProductRating>,
   ) {}
 
   // Get all distinct categories
@@ -99,6 +102,19 @@ export class ProductsService {
 
   // Check if user can rate a product (must have delivered order with this product)
   async canUserRateProduct(productId: number, userId: number) {
+    // Check if user already rated this product
+    const existingRating = await this.productRatingRepository.findOne({
+      where: { user_id: userId, product_id: productId }
+    });
+
+    if (existingRating) {
+      return {
+        canRate: false,
+        hasRated: true,
+        message: 'You have already rated this product',
+      };
+    }
+
     // Find delivered orders for this user that contain this product
     const deliveredOrder = await this.orderRepository
       .createQueryBuilder('order')
@@ -110,6 +126,7 @@ export class ProductsService {
 
     return {
       canRate: !!deliveredOrder,
+      hasRated: false,
       message: deliveredOrder 
         ? 'You can rate this product' 
         : 'You can only rate products from delivered orders',
@@ -126,10 +143,21 @@ export class ProductsService {
     }
 
     // Check if user can rate this product
-    const canRate = await this.canUserRateProduct(id, userId);
-    if (!canRate.canRate) {
+    const canRateCheck = await this.canUserRateProduct(id, userId);
+    if (canRateCheck.hasRated) {
+      throw new BadRequestException('You have already rated this product');
+    }
+    if (!canRateCheck.canRate) {
       throw new BadRequestException('You can only rate products from delivered orders');
     }
+
+    // Save the rating record
+    const productRating = this.productRatingRepository.create({
+      user_id: userId,
+      product_id: id,
+      rating: rating,
+    });
+    await this.productRatingRepository.save(productRating);
 
     // Calculate new average rating
     const currentTotal = Number(product.rating) * product.rating_count;
