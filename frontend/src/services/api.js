@@ -29,8 +29,13 @@ export const productsAPI = {
   },
   getCategories: () => api.get('/products/categories'),
   getOne: (id) => api.get(`/products/${id}`),
-  rateProduct: (id, rating, userId) => api.post(`/products/${id}/rate`, { rating, userId }),
+  rateProduct: (id, rating, userId, review) => api.post(`/products/${id}/rate`, { rating, userId, review }),
   canRate: (productId, userId) => api.get(`/products/${productId}/can-rate?userId=${userId}`),
+  getReviews: (productId, ratingFilter) => {
+    const params = ratingFilter ? `?rating=${ratingFilter}` : '';
+    return api.get(`/products/${productId}/reviews${params}`);
+  },
+  getRatingBreakdown: (productId) => api.get(`/products/${productId}/rating-breakdown`),
   create: (formData) => api.post('/admin/products', formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
   }),

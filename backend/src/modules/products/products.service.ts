@@ -134,7 +134,7 @@ export class ProductsService {
   }
 
   // Rate product
-  async rateProduct(id: number, rating: number, userId: number) {
+  async rateProduct(id: number, rating: number, userId: number, review?: string) {
     const product = await this.findOne(id);
     
     // Validate rating
@@ -156,6 +156,7 @@ export class ProductsService {
       user_id: userId,
       product_id: id,
       rating: rating,
+      review: review || undefined,
     });
     await this.productRatingRepository.save(productRating);
 
@@ -174,5 +175,51 @@ export class ProductsService {
       message: 'Thank you for your rating!',
       product: updatedProduct,
     };
+  }
+
+  // Get reviews for a product
+  async getProductReviews(productId: number, ratingFilter?: number) {
+    const where: any = { product_id: productId };
+    
+    if (ratingFilter && ratingFilter >= 1 && ratingFilter <= 5) {
+      where.rating = ratingFilter;
+    }
+
+    const reviews = await this.productRatingRepository.find({
+      where,
+      relations: ['user'],
+      order: { created_at: 'DESC' },
+    });
+
+    // Remove sensitive user data
+    return reviews.map(review => ({
+      id: review.id,
+      rating: review.rating,
+      review: review.review,
+      created_at: review.created_at,
+      user: {
+        id: review.user.id,
+        name: review.user.name,
+      }
+    }));
+  }
+
+  // Get rating breakdown for a product
+  async getRatingBreakdown(productId: number) {
+    const ratings = await this.productRatingRepository
+      .createQueryBuilder('rating')
+      .select('rating.rating', 'stars')
+      .addSelect('COUNT(*)', 'count')
+      .where('rating.product_id = :productId', { productId })
+      .groupBy('rating.rating')
+      .getRawMany();
+
+    // Create breakdown object with all star levels
+    const breakdown = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+    ratings.forEach(r => {
+      breakdown[r.stars] = parseInt(r.count);
+    });
+
+    return breakdown;
   }
 }

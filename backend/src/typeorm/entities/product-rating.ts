@@ -17,6 +17,9 @@ export class ProductRating {
   @Column({ type: 'int' })
   rating: number;
 
+  @Column({ type: 'text', nullable: true })
+  review: string;
+
   @CreateDateColumn()
   created_at: Date;
 

@@ -18,9 +18,18 @@ const ProductDetailPage = () => {
   const [hasRated, setHasRated] = useState(false);
   const [canRate, setCanRate] = useState(false);
   const [ratingLoading, setRatingLoading] = useState(false);
+  
+  // Review states
+  const [reviews, setReviews] = useState([]);
+  const [ratingBreakdown, setRatingBreakdown] = useState({ 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 });
+  const [selectedRating, setSelectedRating] = useState(0);
+  const [reviewText, setReviewText] = useState('');
+  const [ratingFilter, setRatingFilter] = useState(null);
 
   useEffect(() => {
     fetchProduct();
+    fetchReviews();
+    fetchRatingBreakdown();
   }, [id]);
 
   useEffect(() => {
@@ -29,6 +38,10 @@ const ProductDetailPage = () => {
       checkCanRate();
     }
   }, [user, id]);
+
+  useEffect(() => {
+    fetchReviews(ratingFilter);
+  }, [ratingFilter]);
 
   const fetchProduct = async () => {
     try {
@@ -39,6 +52,24 @@ const ProductDetailPage = () => {
       setError('Product not found');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchReviews = async (filter = null) => {
+    try {
+      const response = await productsAPI.getReviews(id, filter);
+      setReviews(response.data);
+    } catch (err) {
+      console.error('Failed to fetch reviews');
+    }
+  };
+
+  const fetchRatingBreakdown = async () => {
+    try {
+      const response = await productsAPI.getRatingBreakdown(id);
+      setRatingBreakdown(response.data);
+    } catch (err) {
+      console.error('Failed to fetch rating breakdown');
     }
   };
 
@@ -95,18 +126,41 @@ const ProductDetailPage = () => {
       return;
     }
 
+    setSelectedRating(rating);
+  };
+
+  const handleSubmitReview = async () => {
+    if (selectedRating === 0) {
+      toast.warning('Please select a rating');
+      return;
+    }
+
     setRatingLoading(true);
     try {
-      const response = await productsAPI.rateProduct(id, rating, user.id);
+      const response = await productsAPI.rateProduct(id, selectedRating, user.id, reviewText);
       setProduct(response.data.product);
       setHasRated(true);
       setCanRate(false);
-      toast.success('Thank you for your rating!');
+      setSelectedRating(0);
+      setReviewText('');
+      toast.success('Thank you for your review!');
+      // Refresh reviews and breakdown
+      fetchReviews(ratingFilter);
+      fetchRatingBreakdown();
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Failed to submit rating');
+      toast.error(err.response?.data?.message || 'Failed to submit review');
     } finally {
       setRatingLoading(false);
     }
+  };
+
+  const getTotalReviews = () => {
+    return Object.values(ratingBreakdown).reduce((a, b) => a + b, 0);
+  };
+
+  const getPercentage = (count) => {
+    const total = getTotalReviews();
+    return total > 0 ? Math.round((count / total) * 100) : 0;
   };
 
   if (loading) return <div className="loading">Loading...</div>;
@@ -190,12 +244,31 @@ const ProductDetailPage = () => {
           {/* Rating Section - Only for customers who can rate (have delivered order) */}
           {user && !isAdmin && !hasRated && canRate && (
             <div className="rate-product">
-              <h4>Rate this product:</h4>
+              <h4>Rate & Review this product:</h4>
               <StarRating 
+                rating={selectedRating}
                 editable={!ratingLoading}
                 onRate={handleRate}
                 size="large"
               />
+              {selectedRating > 0 && (
+                <div className="review-form">
+                  <textarea
+                    placeholder="Write your review (optional)..."
+                    value={reviewText}
+                    onChange={(e) => setReviewText(e.target.value)}
+                    rows={3}
+                    disabled={ratingLoading}
+                  />
+                  <button 
+                    className="btn-primary submit-review-btn" 
+                    onClick={handleSubmitReview}
+                    disabled={ratingLoading}
+                  >
+                    {ratingLoading ? 'Submitting...' : 'Submit Review'}
+                  </button>
+                </div>
+              )}
             </div>
           )}
 
@@ -203,6 +276,79 @@ const ProductDetailPage = () => {
             <div className="rated-notice">
               ✓ You have rated this product
             </div>
+          )}
+        </div>
+      </div>
+
+      {/* Reviews Section */}
+      <div className="reviews-section">
+        <h2>Customer Reviews</h2>
+        
+        <div className="reviews-header">
+          <div className="rating-summary">
+            <div className="average-rating">
+              <span className="big-rating">{product.rating || 0}</span>
+              <div className="rating-info">
+                <StarRating rating={product.rating || 0} size="medium" />
+                <span className="total-reviews">{getTotalReviews()} reviews</span>
+              </div>
+            </div>
+            
+            <div className="rating-breakdown">
+              {[5, 4, 3, 2, 1].map((stars) => (
+                <div 
+                  key={stars} 
+                  className={`breakdown-row ${ratingFilter === stars ? 'active' : ''}`}
+                  onClick={() => setRatingFilter(ratingFilter === stars ? null : stars)}
+                >
+                  <span className="stars-label">{stars} ⭐</span>
+                  <div className="bar-container">
+                    <div 
+                      className="bar-fill" 
+                      style={{ width: `${getPercentage(ratingBreakdown[stars])}%` }}
+                    />
+                  </div>
+                  <span className="count">({ratingBreakdown[stars]})</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {ratingFilter && (
+            <div className="filter-notice">
+              Showing {ratingFilter}-star reviews 
+              <button onClick={() => setRatingFilter(null)}>Clear filter</button>
+            </div>
+          )}
+        </div>
+
+        <div className="reviews-list">
+          {reviews.length === 0 ? (
+            <div className="no-reviews">
+              {ratingFilter 
+                ? `No ${ratingFilter}-star reviews yet.`
+                : 'No reviews yet. Be the first to review this product!'}
+            </div>
+          ) : (
+            reviews.map((review) => (
+              <div key={review.id} className="review-card">
+                <div className="review-header">
+                  <div className="reviewer-info">
+                    <span className="reviewer-avatar">👤</span>
+                    <span className="reviewer-name">{review.user.name}</span>
+                  </div>
+                  <div className="review-meta">
+                    <StarRating rating={review.rating} size="small" />
+                    <span className="review-date">
+                      {new Date(review.created_at).toLocaleDateString()}
+                    </span>
+                  </div>
+                </div>
+                {review.review && (
+                  <p className="review-text">{review.review}</p>
+                )}
+              </div>
+            ))
           )}
         </div>
       </div>

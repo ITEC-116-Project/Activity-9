@@ -45,6 +45,17 @@ export class ProductsController {
     return this.productsService.canUserRateProduct(id, userId);
   }
 
+  @Get(':id/reviews')
+  getReviews(@Param('id', ParseIntPipe) id: number, @Query('rating') rating?: string) {
+    const ratingFilter = rating ? parseInt(rating) : undefined;
+    return this.productsService.getProductReviews(id, ratingFilter);
+  }
+
+  @Get(':id/rating-breakdown')
+  getRatingBreakdown(@Param('id', ParseIntPipe) id: number) {
+    return this.productsService.getRatingBreakdown(id);
+  }
+
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.productsService.findOne(id);
@@ -55,8 +66,9 @@ export class ProductsController {
     @Param('id', ParseIntPipe) id: number, 
     @Body('rating') rating: number,
     @Body('userId') userId: number,
+    @Body('review') review?: string,
   ) {
-    return this.productsService.rateProduct(id, rating, userId);
+    return this.productsService.rateProduct(id, rating, userId, review);
   }
 }
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './StarRating.css';
 
 const StarRating = ({ 
@@ -9,7 +9,11 @@ const StarRating = ({
   size = 'medium'
 }) => {
   const [hoverRating, setHoverRating] = useState(0);
-  const [selectedRating, setSelectedRating] = useState(0);
+  const [selectedRating, setSelectedRating] = useState(rating);
+
+  useEffect(() => {
+    setSelectedRating(rating);
+  }, [rating]);
 
   const handleClick = (star) => {
     if (editable && onRate) {
