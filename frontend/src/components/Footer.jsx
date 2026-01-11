@@ -1,5 +1,5 @@
 import vmanLogo from '../assets/vman_logo.png';
-import './Footer.css';
+import '../style/Footer.css';
 
 const Footer = () => {
   return (

@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { authAPI } from '../services/api';
 import { useToast } from '../components/Toast';
 import PasswordInput from '../components/PasswordInput';
-import './BuyerSettings.css';
+import '../style/BuyerSettings.css';
 
 const BuyerSettings = () => {
   const { user, login } = useAuth();

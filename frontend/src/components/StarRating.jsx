@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import './StarRating.css';
+import '../style/StarRating.css';
 
 const StarRating = ({ 
   rating = 0, 
@@ -48,7 +48,7 @@ const StarRating = ({
       <div className="stars">
         {[1, 2, 3, 4, 5].map(renderStar)}
       </div>
-      {!editable && totalRatings > 0 && (
+      {!editable && totalRatings > 1 && (
         <span className="rating-text">
           {Number(rating).toFixed(1)} ({totalRatings} {totalRatings === 1 ? 'review' : 'reviews'})
         </span>

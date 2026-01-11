@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ordersAPI, BASE_URL } from '../../services/api';
 import { useToast } from '../../components/Toast';
 import { useConfirm } from '../../components/ConfirmModal';
-import './AdminOrderDetail.css';
+import '../../style/AdminOrderDetail.css';
 
 const AdminOrderDetail = () => {
   const { id } = useParams();
@@ -119,7 +119,6 @@ const AdminOrderDetail = () => {
                 <>
                   <option value="shipped">Shipped</option>
                   <option value="delivered">Delivered</option>
-                  <option value="cancelled">Cancelled</option>
                 </>
               )}
               {order.status === 'delivered' && (

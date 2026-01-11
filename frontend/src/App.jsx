@@ -27,7 +27,7 @@ import AdminOrderDetail from './pages/admin/AdminOrderDetail';
 import AccountSettings from './pages/admin/AccountSettings';
 
 // Styles
-import './styles/global.css';
+import './style/global.css';
 
 // Protected Route for customers
 const CustomerRoute = ({ children }) => {

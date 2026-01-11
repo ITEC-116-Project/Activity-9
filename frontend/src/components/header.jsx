@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import vmanLogo from '../assets/vman_logo.png';
-import './Header.css';
+import '../style/Header.css';
 
 const Header = () => {
   const { user, logout, isAdmin } = useAuth();

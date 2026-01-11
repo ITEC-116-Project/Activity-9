@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { productsAPI, BASE_URL } from '../../services/api';
 import { useToast } from '../../components/Toast';
-import './ProductForm.css';
+import '../../style/ProductForm.css';
 
 const PRODUCT_CATEGORIES = [
   'Laptops',

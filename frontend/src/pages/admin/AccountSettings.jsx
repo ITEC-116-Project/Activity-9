@@ -3,7 +3,7 @@ import { useAuth } from '../../context/AuthContext';
 import { authAPI } from '../../services/api';
 import { useToast } from '../../components/Toast';
 import PasswordInput from '../../components/PasswordInput';
-import './AccountSettings.css';
+import '../../style/AccountSettings.css';
 
 const AccountSettings = () => {
   const { user, login } = useAuth();

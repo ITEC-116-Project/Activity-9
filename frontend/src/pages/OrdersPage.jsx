@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ordersAPI } from '../services/api';
 import { useAuth } from '../context/AuthContext';
-import './OrdersPage.css';
+import '../style/OrdersPage.css';
 
 const BASE_URL = 'http://localhost:3000';
 

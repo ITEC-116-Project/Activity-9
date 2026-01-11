@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { cartAPI, ordersAPI, BASE_URL } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../components/Toast';
-import './CheckoutPage.css';
+import '../style/CheckoutPage.css';
 
 const CheckoutPage = () => {
   const { user } = useAuth();

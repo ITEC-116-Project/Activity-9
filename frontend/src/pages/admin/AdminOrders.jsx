@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ordersAPI, BASE_URL } from '../../services/api';
 import { useToast } from '../../components/Toast';
 import { useConfirm } from '../../components/ConfirmModal';
-import './AdminOrders.css';
+import '../../style/AdminOrders.css';
 
 const AdminOrders = () => {
   const toast = useToast();
@@ -142,7 +142,6 @@ const AdminOrders = () => {
                       <>
                         <option value="shipped">Shipped</option>
                         <option value="delivered">Delivered</option>
-                        <option value="cancelled">Cancelled</option>
                       </>
                     )}
                     {order.status === 'delivered' && (

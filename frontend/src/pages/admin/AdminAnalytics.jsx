@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ordersAPI } from '../../services/api';
-import './AdminAnalytics.css';
+import '../../style/AdminAnalytics.css';
 
 const AdminAnalytics = () => {
   const [analytics, setAnalytics] = useState(null);

@@ -4,7 +4,7 @@ import { productsAPI, cartAPI, BASE_URL } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../components/Toast';
 import StarRating from '../components/StarRating';
-import './ProductDetailPage.css';
+import '../style/ProductDetailPage.css';
 
 const ProductDetailPage = () => {
   const { id } = useParams();
@@ -338,7 +338,7 @@ const ProductDetailPage = () => {
                     <span className="reviewer-name">{review.user.name}</span>
                   </div>
                   <div className="review-meta">
-                    <StarRating rating={review.rating} size="small" />
+                    <StarRating rating={review.rating} totalRatings={1} size="small" />
                     <span className="review-date">
                       {new Date(review.created_at).toLocaleDateString()}
                     </span>

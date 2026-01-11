@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { productsAPI, BASE_URL } from '../../services/api';
 import { useToast } from '../../components/Toast';
 import { useConfirm } from '../../components/ConfirmModal';
-import './AdminProducts.css';
+import '../../style/AdminProducts.css';
 
 const AdminProducts = () => {
   const toast = useToast();

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { ordersAPI } from '../../services/api';
-import './AdminDashboard.css';
+import '../../style/AdminDashboard.css';
 
 const AdminDashboard = () => {
   const { user } = useAuth();

@@ -1,5 +1,5 @@
 import { useState, createContext, useContext } from 'react';
-import './ConfirmModal.css';
+import '../style/ConfirmModal.css';
 
 const ConfirmContext = createContext();
 

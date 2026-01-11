@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { useToast } from '../components/Toast';
 import PasswordInput from '../components/PasswordInput';
 import vmanLogo from '../assets/vman_logo_colored.png';
-import './RegisterPage.css';
+import '../style/RegisterPage.css';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
